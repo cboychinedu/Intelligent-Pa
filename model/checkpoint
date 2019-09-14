@@ -1,0 +1,2 @@
+model_checkpoint_path: "/home/blackbox/Documents/Projects/Analytics Intelligence Personal Assistant/aipa/nlp-server/main_model/model.tflearn"
+all_model_checkpoint_paths: "/home/blackbox/Documents/Projects/Analytics Intelligence Personal Assistant/aipa/nlp-server/main_model/model.tflearn"
