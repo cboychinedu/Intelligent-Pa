@@ -1,35 +1,55 @@
 ﻿wiki_question, define electrons
-bio_question, tell me about yourself
-bio_question, who are you
-bio_question, who are you
-bio_question, explain who you are
-bio_question, what can you do?
-bio_question, which tasks can you perform
-bio_question, what do you do
-bio_question, what are you good at
-bio_question, what is your job
-bio_question, what job can you do
-bio_question, what task can you do
-bio_question, what tasks can you perform
-bio_question, what jobs do you do, or can you do ?
-bio_question, tell me who you are, and what you are good at ?
-bio_question, tell me about who you are ?
-bio_question, who are you
-bio_question, what can you do
-bio_question, and what tasks can you perform, or better still, what tasks are you good at ?
-bio_question, how old are you ?
-bio_question, okay great, tell me about yourself ?
-bio_question, ok nice, tell me what jobs or services you can offer ?
-bio_question, what services can you offer
-bio_question, how can you be of help to me ?
-bio_question, how can you help me out in solving this task
-bio_question, i need updates on this work
-bio_question, help me firstly by telling me your age ? 
-bio_question, what is your name
+location, where is my location
+location, where am i located
+location, find my current location okay
+location, where is my location
+bank_details, what is my bank statement ?
+bank_details, i want to know my bank details or statement
+location, find my location
+location, where am i located
+bank_details, give me my bank statement ?
+location, find my location please okay
 wiki_question, tell me about fela anikuti
 wiki_question, locate this place
+bank_details, what is my bank statement
+bank_details, my account balance please
+bank_details, my bank statement please
+bank_details,  so aipa, tell me how much i  have in my account now ?
+bank_details, so how much do i have in my bank now ?
+bank_details, tell me how much i have in my bank now ?
+bank_details, i need information on how much i have in my bank ?
+bank_details, how much is in my bank now ?
+bank_details, what is my actual account balance ?
+bank_details, my bank statement please ?
+bank_details, so how much do i have in my account now ?
+bank_details, how much is my bank statement ?
+bank_details, how much is inside my account now ?
 wiki_question, find this
+location, where am i located ?
+location, find my actual location please
+location, find my location okay
+location, whre am i located ?
+location, please where am i really located ?
+location, where is your location ?
+location, where is the closest branch to me ?
+location, where or how can you pin point my actual location ?
+location, find me aipa
+location, where am i now ?
+bank_details, give me a statement of my bank account details ...
+location, find me and locate me
+location, please tell me where i am ?
+location, how can you find me ?
+location, where am i please ?
+location, find my actual locality
+location, please find me ?
+location, where am i actually ?
 wiki_question, where is it located
+bank_details, i want to see my bank statement
+bank_details, show me my bank transaction
+bank_details, show me my account balance
+bank_details, what is my account balance
+bank_details, please what is my account balance
+bank_details, i want to see my bank account balance
 wiki_question, where is it
 wiki_question, how can i find this
 wiki_question, i need to know
@@ -42,6 +62,8 @@ wiki_question, tell me how cells work
 wiki_question, tell me about a neuron
 wiki_question, tell me how a cell structure works
 wiki_question, tell me the coup in nigeria
+bank_details, how much is in my account now ?
+bank_details, how much do i have in my account now ?
 wiki_question, tell me the meaning of the word physcopath
 wiki_question, tell me how to locate italy in the world map
 wiki_question, describe how evolution works
