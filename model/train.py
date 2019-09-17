@@ -78,5 +78,5 @@ net = tflearn.regression(net)
 model = tflearn.DNN(net)
 
 # Training and saving the Model
-model.fit(training, output, n_epoch=10000, batch_size=8, show_metric=True)
+model.fit(training, output, n_epoch=80000, batch_size=8, show_metric=True)
 model.save('model.tflearn')

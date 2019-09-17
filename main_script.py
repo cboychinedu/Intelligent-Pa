@@ -1,10 +1,10 @@
 #!/usr/bin/env python
 
-# Description:
-# Author:
-# Company:
-# Date Created:
-#
+# Description: This is an intelligent bot that uses Naive Bayes classifier to create different labels for communication.
+# Author: Mbonu Chinedum Endurance
+# Company: Analytics Intelligence
+# Email: chinedu.mbonu@analyticsintelligence.com
+# Date Created: 15-sept-2019
 
 # Importing the necessary packages.
 import nltk
@@ -16,7 +16,6 @@ import pickle
 import numpy as np
 import tensorflow as tf
 import wikipedia as wiki
-from time import sleep
 from nltk.corpus import stopwords
 from nltk.stem.lancaster import LancasterStemmer
 from nltk import PorterStemmer as Stemmer
@@ -29,11 +28,11 @@ from spellchecker import SpellChecker
 # Creating a Dictionary for  the individual responses
 response = {}
 response['age'] = ["I am 18 years old!", "Well, Aipa is just only 18 years old", "Well, Aipa is just 18 years old.", "well, since you asked, i am 18 years old, and My name is Aipa."]
-response['greeting'] = ['Hey there', 'Hello, how are you', 'Hello, How are you doing?']
-response['task'] = ["""Good., So i guess you know that I can perform credit scoring, web analysis and Data analysis.\nBut just tell me what you need and i'll give you the accurate results.."""]
+response['greeting'] = ['Hi ', 'Hello, how are you', 'Hello, How are you doing?']
+response['task'] = ["""Good., So i can  perform credit scoring, web analysis and Data analysis.\nBut just tell me what you need and i'll give you the accurate results.."""]
 response['bio_question'] = ['fine fine, Its Really nice of you to ask tho..', "Fine okay,  What about you?", 'i Am Doing Good, Thanks for asking...']
 response['name'] = ['My name is Aipa, and i am a Personal Assistant for analytics intelligence', 'My Name is Aipa, and i can help you out with Credit scoring, Web analytics and Data Analytics']
-response['good_reply'] = ['Ok Perfect...', 'Perfect...', 'Ok Nice..', 'Alright...']
+response['good_reply'] = ['Ok Perfect...', 'Perfect...', 'Ok, Thats Good tho..', 'Alright...']
 
 # Creating a Dictionary for the responses given back to the user if the question asked is going to be passed into wikipedia
 d = {}
@@ -226,7 +225,7 @@ model = tflearn.DNN(net)
 try:
     model.load("model/model.tflearn")
 except:
-    model.fit(training, output, n_epoch=1000, batch_size=8, show_metric=True)
+    model.fit(training, output, n_epoch=10000, batch_size=8, show_metric=True)
     model.save("model/model.tflearn")
 
 
@@ -282,6 +281,14 @@ def chat():
             if quest == 'wiki_question':
                 wikipedia_question(inp)
 
+            elif quest == 'bank_details':
+                print("""These are your recent transactions\n
+                      Txn: Credit \nAcct: 2XX..76X\nAmt:NGN 6,000.00\nDesc:MOB/UTU/3704572469/ \n
+                      Date: 10-Sep-2019 18: 45 \nBal:NGN 195,733,000""")
+
+            elif quest == 'location':
+                print('you are located in this particular location...')
+
         # Setting an else if statement to check if the predicted tag was a Conversation, and if it was, it
         # Should pass the input Question into the conversation classifier to actually find out what type of conversation
         # it is and perform actions based on it .
@@ -314,6 +321,7 @@ def chat():
         for i in dict_pickle:
             with open('inputdata.csv', 'a+') as f:
                 f.write('{}\n'.format(i))
+
 
 # Defining a function for the interactive mode in the System.
 def interaction(value, interactive_message):
