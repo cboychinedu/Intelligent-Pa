@@ -43,6 +43,7 @@ stop_words = stopwords.words('english')
 # Assigning a variable called spell to check and correct the spelling of the input word
 # or sentences passed into the system.
 spell = SpellChecker()
+value = 'doc' 
 
 # Loading in the  json dataset for classification between a Question and a Conversation.
 with open("model/model_1.json") as file:
