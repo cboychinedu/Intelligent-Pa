@@ -108,6 +108,11 @@ def wikipedia_question(message):
     if result == 'wiki_question':
         val = random.choice(d['wiki_question'])
         print("Bot: ", val)
+        lang = "en"
+        speech = Speech(val, lang)
+        speech.play()
+
+        # Getting the user input 
         msg = input('You: ')
         if msg.lower().replace(' ', '') == 'yes':
             # import the question script and pass the input question into the function.
@@ -127,7 +132,11 @@ def wikipedia_question(message):
                 new_val = " ".join(_correct)
                 corrected_message = extract_noun(new_val)
                 wikipedia_message = wiki.summary(corrected_message, sentences=5)
-                print(wikipedia_message)
+                print("Bot: ", wikipedia_message)
+                lang = "en"
+                speech = Speech(wikipedia_message, lang)
+                speech.play()
+
 
             except:
                 print('Please Rephrase, Currently unable to get your result...')
