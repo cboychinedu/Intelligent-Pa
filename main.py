@@ -21,6 +21,7 @@ from nltk.stem.lancaster import LancasterStemmer
 from nltk import PorterStemmer as Stemmer
 from sklearn.feature_extraction.text import TfidfVectorizer
 from sklearn.pipeline import Pipeline
+from google_speech import Speech
 from sklearn.naive_bayes import MultinomialNB
 from spellchecker import SpellChecker
 
@@ -38,7 +39,7 @@ response['good_reply'] = ['Ok Perfect...', 'Perfect...', 'Ok, Thats Good tho..',
 d = {}
 d['wiki_question'] = ['Your answers would be extracted from wikipedia, are you okay with this?']
 d['age'] = ['My name is Aipa, and i am a Personal Assistant at Analytics Intelligence, and i am also 18 years old.', 'My is Aipa, I am a Personal Assistant for Analytics Intelligence, and i am 18years young.']
-stop_words = stopwords.words('english')
+stop_words = set(stopwords.words('english')) 
 
 # Assigning a variable called spell to check and correct the spelling of the input word
 # or sentences passed into the system.
@@ -212,7 +213,7 @@ except:
         pickle.dump((words, labels, training, output), f)
 
 # Building the model by adding 8 neurons for 3 layers and Resetting the Tensorflow graph.
-tf.reset_default_graph()
+tf.compat.v1.reset_default_graph()
 net = tflearn.input_data(shape=[None, len(training[0])])
 net = tflearn.fully_connected(net, 8)
 net = tflearn.fully_connected(net, 8)
@@ -275,7 +276,12 @@ def chat():
             # Getting The Actual Predicted tag from the Question model and saving it into the variable called quest
             from question.question import question_classifier
             quest = question_classifier(inp)
-            print(quest)
+
+            # Speech 
+            lang = "en"
+            print("Bot: ", quest)
+            speech = Speech(quest, lang)
+            speech.play()
 
             # if the predicted Question is a Wikipedia based question, then pass the question into wikipedia api to
             # Get the answers for the question.
@@ -298,24 +304,39 @@ def chat():
             from conversation.conversation_script import conversation_classifier
             convo = conversation_classifier(inp)
 
+            # Setting the language 
+            lang = "en"
+
             if convo == 'greeting':
                 reply = random.choice(response['greeting'])
                 print(reply)
+                speech = Speech(reply, lang)
+                speech.play()
             elif convo == 'bio_question':
                 reply = random.choice(response['bio_question'])
                 print(reply)
+                speech = Speech(reply, lang)
+                speech.play()
             elif convo == 'task':
                 reply = random.choice(response['task'])
                 print(reply)
+                speech = Speech(reply, lang)
+                speech.play()
             elif convo == 'age':
                 reply = random.choice(response['age'])
                 print(reply)
+                speech = Speech(reply, lang)
+                speech.play()
             elif convo == 'name':
                 reply = random.choice(response['name'])
                 print(reply)
+                speech = Speech(reply, lang)
+                speech.play()
             elif convo == 'good_reply':
                 reply = random.choice(response['good_reply'])
                 print(reply)
+                speech = Speech(reply, lang)
+                speech.play()
 
         # Saving the user input and predicted tags into a new csv dataset file called 'inputdata.csv'
         # for furthermore training.
