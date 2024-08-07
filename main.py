@@ -299,8 +299,15 @@ def chat():
 
             elif quest == 'bank_details':
                 print("""These are your recent transactions\n
-                      Txn: Credit \nAcct: 2XX..76X\nAmt:NGN 6,000.00\nDesc:MOB/UTU/3704572469/ \n
-                      Date: 10-Sep-2019 18: 45 \nBal:NGN 195,733,000""")
+                      Txn: Credit
+                      Acct: 2XX..76X Amt:NGN 6,000.00
+                      Desc:MOB/UTU/3704572469/
+                      Date: 10-Sep-2019 18: 45 
+                      Bal:NGN 195,733,000
+                    """)
+                lang = "en"
+                speech = Speech("Bal:NGN 195,733,000", lang) 
+                speech.play();
 
             elif quest == 'location':
                 print('you are located in this particular location...')
