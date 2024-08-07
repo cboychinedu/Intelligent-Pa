@@ -107,7 +107,7 @@ def wikipedia_question(message):
     result = 'wiki_question'
     if result == 'wiki_question':
         val = random.choice(d['wiki_question'])
-        print(val)
+        print("Bot: ", val)
         msg = input('You: ')
         if msg.lower().replace(' ', '') == 'yes':
             # import the question script and pass the input question into the function.
@@ -309,32 +309,32 @@ def chat():
 
             if convo == 'greeting':
                 reply = random.choice(response['greeting'])
-                print(reply)
+                print("Bot: ", reply)
                 speech = Speech(reply, lang)
                 speech.play()
             elif convo == 'bio_question':
                 reply = random.choice(response['bio_question'])
-                print(reply)
+                print("Bot: ", reply)
                 speech = Speech(reply, lang)
                 speech.play()
             elif convo == 'task':
                 reply = random.choice(response['task'])
-                print(reply)
+                print("Bot: ", reply)
                 speech = Speech(reply, lang)
                 speech.play()
             elif convo == 'age':
                 reply = random.choice(response['age'])
-                print(reply)
+                print("Bot: ", reply)
                 speech = Speech(reply, lang)
                 speech.play()
             elif convo == 'name':
                 reply = random.choice(response['name'])
-                print(reply)
+                print("Bot: ", reply)
                 speech = Speech(reply, lang)
                 speech.play()
             elif convo == 'good_reply':
                 reply = random.choice(response['good_reply'])
-                print(reply)
+                print("Bot: ", reply)
                 speech = Speech(reply, lang)
                 speech.play()
 
