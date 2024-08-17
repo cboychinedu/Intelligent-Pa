@@ -6,7 +6,7 @@
     justify-content: center;
 }
 .container {
-    height: fit-content;
+    height: 525px;
     background-color: #576273;
     display: flex;
     width: fit-content;

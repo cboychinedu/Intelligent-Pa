@@ -2,8 +2,7 @@
 import React, { Component, Fragment } from 'react'
 import { Link } from 'react-router-dom';
 import styles from "./Login.module.css"; 
-import loginLogo from "./Images/login.jpg"; 
-
+import GoogleBtn from '../Components/GoogleBtn/GoogleBtn';
 
 // Creating the functional based component 
 const Login = (props) => {
@@ -13,6 +12,13 @@ const Login = (props) => {
             <div className={styles.mainDiv}>
                 <div className={styles.container}>
                     <div className={styles.rightDiv}> 
+                        <div className={styles.div}> 
+                            <p className={styles.loginText}> Log In </p>
+                            <GoogleBtn InputMethod="Log In"/> 
+                        </div>
+                        <div> 
+                            <hr/> 
+                        </div>
                         <div className={styles.div}> 
                             <label className={styles.label} for="Email"> Email </label> <br /> 
                             <input type="email" placeholder='Email address...' className={styles.inputForm}/>

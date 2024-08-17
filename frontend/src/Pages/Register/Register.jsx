@@ -2,6 +2,7 @@
 import React, { Fragment } from 'react'; 
 import styles from "./Register.module.css"; 
 import { Link } from 'react-router-dom';
+import GoogleBtn from '../Components/GoogleBtn/GoogleBtn';
 
 // Creating the functional based component 
 const Register = (props) => {
@@ -11,6 +12,13 @@ const Register = (props) => {
             <div className={styles.mainDiv}>
                 <div className={styles.container}>
                     <div className={styles.rightDiv}>
+                        <div className={styles.div}>
+                            <p className={styles.registerText}> Register </p>
+                            <GoogleBtn InputMethod="Register" />
+                        </div>
+                        <div> 
+                            <hr/> 
+                        </div>
                         <div className={styles.div}> 
                             <label className={styles.label}> Fullname </label> <br /> 
                             <input type="text" placeholder='Enter your fullname' className={styles.inputForm} />

@@ -9,12 +9,15 @@
     justify-content: center;
 }
 .container {
-    height: fit-content;
+    height: 410px;
     background-color: #576273;
     display: flex;
     width: fit-content;
     padding: 50px;
     border-radius: 8px
+}
+.loginText {
+    color: white;
 }
 .rightDiv {
     width: fit-content;
