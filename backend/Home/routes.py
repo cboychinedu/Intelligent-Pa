@@ -18,15 +18,31 @@ db = MongoDB();
 def Register(): 
     # Get the firstname, email and password data
     requestData = request.get_json()
-    firstname = requestData["firstname"]
+    fullname = requestData["fullname"]
     email = requestData["emailAddress"]
     password = requestData["password"]
 
     # Connecting to the Mongodb database, and save the users data 
     db.connect('mongodb://localhost:27017/', 'intelligent_pa')
 
-    # 
+    # Checking to see if the datat base data is present
     databaseData = db.retrieve_data('users', email=email)
+
+    # 
+    if databaseData == None:
+        # Hashing the password 
+        hashPassword = bcrypt.hashpw(password.encode('utff-8'), bcrypt.gensalt(10))
+        hashPassword = hashPassword.decode('utf-8')
+
+        # Request data 
+        userData = {
+            "fullname": fullname, 
+            "email": email, 
+            "password": hashPassword
+        }
+
+        # Save the user data 
+        result = db.save_data("users", userData)
 
 
     # Register the user 
