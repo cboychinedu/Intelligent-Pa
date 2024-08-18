@@ -1,0 +1,53 @@
+.para {
+    font-size: 8em;
+}
+.mainDiv {
+    background-color: #444654;
+    height: 100vh;
+}
+body {
+    background-color: #444654;
+}
+.container {
+    display: flex;
+    bottom: 0;
+    width: 100%;
+    position: absolute;
+    align-content: center;
+    justify-content: center;
+}
+.inputForm {
+    padding: 10px;
+    width: 50%;
+    bottom: 0;
+    color: #adadad; 
+    box-sizing: border-box;
+    border-radius: 4px;
+    background: #545666;
+    border: 1px solid #646060;
+    padding-left: 11px;
+    outline: 1px solid #646060;
+    margin-bottom: 30px;
+}
+.greetingsMessage {
+    margin: auto;
+    width: 69%;
+    border: 2px solid white;
+    margin-top: 133px;
+    text-align: center;
+    color: white;
+    height: 22vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.formList {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+}
+.submitButton {
+    height: 40px;
+    width: 107px;
+    margin-left: 10px;
+}
