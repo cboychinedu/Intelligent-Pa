@@ -64,8 +64,9 @@ class MongoDB:
             return None; 
 
         # Convert the MongoDB documents into a json object 
-        json_data = json.dumps(dict(data), default=str)
-        json_data = jsonify(json_data); 
+        json_data = data; 
+        # json_data = json.dumps(dict(data), default=str)
+        # json_data = jsonify(json_data); 
 
         # Return the json object 
         return json_data;  

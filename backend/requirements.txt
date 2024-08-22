@@ -19,3 +19,5 @@ seaborn
 SpeechRecognition
 tensorflow
 tflearn
+PyJWT
+python-dotenv
