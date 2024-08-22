@@ -24,5 +24,5 @@ app.register_blueprint(home, url_prefix="/")
 
 # Running the flask application 
 if __name__ == "__main__": 
-    app.run(port=3001, host="localhost", debug=True)
+    app.run(port=3001, host="localhost")
     app.run() 
