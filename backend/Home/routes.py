@@ -53,7 +53,7 @@ def Login():
             return jsonify({
                 "status": "success", 
                 "message": "User logged in", 
-                "token": token, 
+                "x-auth-token": token, 
                 "statusCode": 200
             })
         
