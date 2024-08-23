@@ -1,0 +1,14 @@
+#flashMessage {
+    width: 275px;
+    background-color: #ffb213;
+    color: #000000;
+    margin-top: 20px;
+    margin-left: 20px;
+    position: fixed;
+    left: -100%;
+    border-radius: 4px;
+    font-weight: bold;
+}
+#flashMessage.open {
+    left: 0;
+}

@@ -1,4 +1,5 @@
 // Importing the necessary modules 
+import "./Register.css"; 
 import axios from 'axios'; 
 import React, { Fragment, useState } from 'react'; 
 import styles from "./Register.module.css"; 
@@ -7,7 +8,8 @@ import GoogleBtn from '../Components/GoogleBtn/GoogleBtn';
 
 // Creating the functional based component 
 const Register = (props) => {
-    // State
+    // Setting the state 
+    const [statusMessage, setStatusMessage] = useState("User registered"); 
 
     // Creating a function for handling the submit button 
     const handleSubmit =() => {
@@ -16,26 +18,57 @@ const Register = (props) => {
         const email = document.getElementById("email"); 
         const password = document.getElementById("password"); 
         const confirmPassword = document.getElementById("confirmPassword"); 
+        const flashMessage = document.getElementById("flashMessage");
 
         // Checking if the fields are filled 
         if (fullname.value === "") {
-            alert("Fullname required"); 
+            setStatusMessage("Fullname required");
+            flashMessage.classList.add("open"); 
+            
+            // Remove the menu after 3 seconds 
+            setTimeout(() => {
+                flashMessage.classList.remove('open');
+            }, 3000)
         }
 
         else if (email.value === "") {
-            alert("Email address required");
+            setStatusMessage("Email address required");
+            flashMessage.classList.add('open'); 
+
+            // Remove the menu after 3 seconds 
+            setTimeout(() => {
+                flashMessage.classList.remove('open');
+            }, 3000)
         }
 
         else if (password.value === "") {
-            alert("Password required")
+            setStatusMessage("Password required")
+            flashMessage.classList.add('open'); 
+
+            // Remove the menu after 3 seconds 
+            setTimeout(() => {
+                flashMessage.classList.remove('open');
+            }, 3000)
         }
 
         else if (confirmPassword.value === "") {
-            alert("Confirm password field is required")
+            setStatusMessage("Confirm password field is required"); 
+            flashMessage.classList.add('open'); 
+
+            // Remove the menu after 3 seconds 
+            setTimeout(() => {
+                flashMessage.classList.remove('open');
+            }, 3000)
         }
 
         else if (password.value !== confirmPassword.value) {
-            alert("Passwords are not correct")
+            setStatusMessage("Passwords are not correct")
+            flashMessage.classList.add('open'); 
+
+            // Remove the menu after 3 seconds 
+            setTimeout(() => {
+                flashMessage.classList.remove('open');
+            }, 3000)
         }
 
         else {
@@ -64,7 +97,13 @@ const Register = (props) => {
             axios.post(serverIpAddress, userData, config)
             .then((responseData) => {
                 if (responseData.data.status === "success") {
-                    alert(responseData.data.message); 
+                    setStatusMessage(responseData.data.message); 
+                    flashMessage.classList.add('open'); 
+
+                    // Remove the menu after 3 seconds 
+                    setTimeout(() => {
+                        flashMessage.classList.remove('open');
+                    }, 3000)
 
                     // Redirecting the user to the login page 
                     setTimeout(() => {
@@ -83,6 +122,10 @@ const Register = (props) => {
     // Rendering the register component 
     return(
         <Fragment> 
+            {/* Adding the flash message */}
+            <div className={styles.flashMessage} id="flashMessage"> 
+                <p className={styles.flashMessageText}> {statusMessage} </p>
+            </div>
             <div className={styles.mainDiv}>
                 <div className={styles.container}>
                     <div className={styles.rightDiv}>

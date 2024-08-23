@@ -5,9 +5,6 @@
     background-color: #444654;
     height: 100vh;
 }
-body {
-    background-color: #444654;
-}
 .container {
     display: flex;
     bottom: 0;

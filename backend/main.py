@@ -306,7 +306,7 @@ def chat():
                       Bal:NGN 195,733,000
                     """)
                 lang = "en"
-                speech = Speech("Bal:NGN 195,733,000", lang)s 
+                speech = Speech("Bal:NGN 195,733,000", lang)
                 speech.play();
 
             elif quest == 'location':
