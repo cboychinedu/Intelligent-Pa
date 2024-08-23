@@ -50,9 +50,9 @@
 }
 .messagesContainerDiv {
     margin: auto;
-    width: 58%;
+    width: 70%;
     /* border: 1px solid #2e2e2f;; */
-    height: 710px;
+    height: 589px;
     margin-top: 55px;
     scrollbar-width: none;
     -ms-overflow-style: none;
