@@ -1,6 +1,7 @@
 // Importing the necessary modules
 import React, { Fragment, useState, useEffect, useRef } from 'react';
 import styles from "./Dashboard.module.css"; 
+import Navbar from '../Components/Navbar/Navbar';
 
 // Creating the dashboard component
 const Dashboard = (props) => {
@@ -38,6 +39,9 @@ const Dashboard = (props) => {
   // Rendering the component
   return (
     <Fragment>
+      {/* Adding the navbar */}
+      <Navbar /> 
+      
       <div className={styles.messagesContainerDiv}>
         {messages.map((msg, index) => (
           <div key={index} className={styles.messagesContainer}>

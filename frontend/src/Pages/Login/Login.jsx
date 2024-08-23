@@ -2,11 +2,16 @@
 import "./Login.css"; 
 import { Link } from 'react-router-dom';
 import styles from "./Login.module.css";
-import React, { Component, Fragment, useState } from 'react' 
+import React, { Component, Fragment, useState, useContext } from 'react' 
 import GoogleBtn from '../Components/GoogleBtn/GoogleBtn';
+import axios from "axios";
+import { AuthContext } from "../../Auth/AuthContext";
 
 // Creating the functional based component 
 const Login = (props) => {
+    // Accessing the Auth context 
+    const { setToken } = useContext(AuthContext); 
+
     // Setting the state 
     const [statusMessage, setStatusMessage] = useState(""); 
 
@@ -39,6 +44,66 @@ const Login = (props) => {
             setTimeout(() => {
                 flashMessage.classList.remove("open");
             }, 3000)
+        }
+
+        // else if all field was filled 
+        else {
+            // Get all the user's login data 
+            let userData = JSON.stringify({
+                "emailAddress": email.value, 
+                "password": password.value,
+            }); 
+
+            // Setting the axios headers config 
+            const config = {
+                headers: {
+                    'Content-Type': 'application/json; charset=UTF-8',
+                    'Access-Control-Allow-Origin': '*',
+                    'Access-Control-Allow-Methods': 'POST',
+                    'Access-Control-Allow-Headers': 'Content-Type',
+                    "x-auth-token": "null", 
+                },
+            }
+
+            // Setting the remote server ip address 
+            const serverIpAddress = `http://localhost:3001/login`; 
+
+            // Making a post request to the server ip address 
+            axios.post(serverIpAddress, userData, config) 
+            .then((responseData) => {
+                if (responseData.data.status === "success") {
+                    // Setting the state 
+                    setStatusMessage("Welcome..."); 
+                    flashMessage.classList.add("open"); 
+
+                    // Remove the menu after 3 seconds 
+                    setTimeout(() => {
+                        flashMessage.classList.remove("open");
+                    }, 3000)
+
+                    // Delay the login duration for 3 seconds 
+                    setTimeout(() => {
+                        // Saving the x-auth token into the local storage memory
+                        localStorage.setItem('x-auth-token', responseData.data['x-auth-token']);
+                        setToken(responseData.data['x-auth-token']);
+
+                        // Redirect the user to the dashboard page 
+                        window.location.href = "/dashboard"; 
+                    }, 3000)
+                    
+                }
+
+                // Else if the data from the request was an error 
+                else {
+                    setStatusMessage("Invalid email or password");
+                    flashMessage.classList.add("open"); 
+
+                    // Remove the menu after 3 seconds 
+                    setTimeout(() => {
+                        flashMessage.classList.remove("open");
+                    }, 3000) 
+                }
+            })
         }
     }
 

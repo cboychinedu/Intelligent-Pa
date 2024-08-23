@@ -1,0 +1,60 @@
+.mainNav {
+    height: 4em;
+    background-color: rgb(27 29 75);
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    overflow: hidden;
+    position: sticky;
+    top: 0;
+    z-index: 1000; 
+}
+.navContainerDiv {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 75%;
+}
+.rightNav {
+    display: flex;
+    width: 2em;
+    margin-right: 20em;
+    justify-content: space-between;
+}
+.searchInputForm {
+    height: 35px;
+    padding-left: 1em;
+    border-radius: 5px;
+    margin-right: 5px;
+    font-size: 12px;
+    margin-top: 9px;
+    outline: none;
+    border: 2px solid #a5a5cf;
+}
+.leftNav {
+    display: flex;
+    width: 35%;
+    justify-content: space-evenly;
+}
+.leftNav a {
+    text-decoration: none;
+    color: white;
+    font-size: 14px;
+}
+
+.leftNav a:hover, 
+.leftNav a:focus {
+    text-decoration: underline;
+}
+.submitButton {
+    height: 3em;
+    margin-top: 7px;
+    margin-bottom: 8px;
+    width: 133px;
+    font-weight: bold;
+    color: white;
+    font-size: 13px;
+    background-color: #5d5dd9;
+    border-radius: 5px;
+    border: none;
+}
