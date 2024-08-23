@@ -1,5 +1,5 @@
 // Importing the necessary modules
-import React, { Fragment, useState } from 'react';
+import React, { Fragment, useState, useEffect, useRef } from 'react';
 import styles from "./Dashboard.module.css"; 
 
 // Creating the dashboard component
@@ -7,6 +7,19 @@ const Dashboard = (props) => {
   // Setting the state 
   const [message, setMessage] = useState(""); 
   const [messages, setMessages] = useState([]);
+
+  // Reference to the messages container div
+  const messagesEndRef = useRef(null);
+
+  // Scroll to bottom function
+  const scrollToBottom = () => {
+    messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
+  };
+
+  // Scroll to bottom whenever messages change
+  useEffect(() => {
+    scrollToBottom();
+  }, [messages]);
 
   // Handling input change
   const handleChange = (e) => {
@@ -25,11 +38,13 @@ const Dashboard = (props) => {
   // Rendering the component
   return (
     <Fragment>
-
-      <div className={styles.messagesContainer}>
-            {messages.map((msg, index) => (
-              <p key={index} className={styles.message}>{msg}</p>
-            ))}
+      <div className={styles.messagesContainerDiv}>
+        {messages.map((msg, index) => (
+          <div key={index} className={styles.messagesContainer}>
+            <p className={styles.message}>{msg}</p>
+          </div>
+        ))}
+        <div ref={messagesEndRef} />
       </div>
 
       <div className={styles.container}>
@@ -44,8 +59,6 @@ const Dashboard = (props) => {
           <button type="submit" className={styles.submitButton}>Send</button>
         </form>
       </div>
-
-
     </Fragment>
   );
 }
