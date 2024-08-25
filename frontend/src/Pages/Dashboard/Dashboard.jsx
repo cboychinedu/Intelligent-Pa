@@ -1,5 +1,6 @@
 // Importing the necessary modules
 import React, { Fragment, useState, useEffect, useRef } from 'react';
+import axios from 'axios';
 import styles from "./Dashboard.module.css"; 
 import Navbar from '../Components/Navbar/Navbar';
 
@@ -28,11 +29,51 @@ const Dashboard = (props) => {
   };
 
   // Handling form submission
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
+
     if (message.trim() !== "") {
+      // Add the user's message to the list
       setMessages([...messages, message]);
-      setMessage(""); // Clear the input after submission
+
+      // Prepare the user data to be sent
+      const userData = JSON.stringify({
+        chatData: message
+      });
+
+      // Setting the headers configuration 
+      const config = {
+      headers: {
+              'Content-Type': 'application/json; charset=UTF-8',
+              'Access-Control-Allow-Origin': '*',
+              'Access-Control-Allow-Methods': 'POST',
+              'Access-Control-Allow-Headers': 'Content-Type',
+              "x-auth-token": "null", 
+          },
+      };
+
+        // Send the POST request
+        const serverIpAddress = `http://localhost:3001/dashboard/`; 
+        axios.post(serverIpAddress, userData, config)
+        .then((responseData) => {
+          console.log(responseData); 
+          speakText(responseData.data.message)
+          setMessages(prevMessages => [...prevMessages, responseData.data.message]);
+
+            // Clear the input after submission
+            setMessage(""); 
+        })
+        
+    }
+  };
+
+  // Speak text 
+  const speakText = (text) => {
+    if ('speechSynthesis' in window) {
+      const utterance = new SpeechSynthesisUtterance(text); 
+      window.speechSynthesis.speak(utterance); 
+    } else {
+      alert("Your browser does not support speech synthesis.");
     }
   };
 

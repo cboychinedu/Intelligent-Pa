@@ -18,9 +18,11 @@ CORS(app)
 
 # Importing the views 
 from Home.routes import home 
+from Dashboard.routes import dashboard
 
 # Register the views using the "app.register" function 
 app.register_blueprint(home, url_prefix="/")
+app.register_blueprint(dashboard, url_prefix="/dashboard")
 
 # Running the flask application 
 if __name__ == "__main__": 
