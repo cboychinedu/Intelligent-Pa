@@ -34,7 +34,7 @@ const Dashboard = (props) => {
 
     if (message.trim() !== "") {
       // Add the user's message to the list
-      setMessages([...messages, message]);
+      setMessages([...messages, { text: message, type: 'user' }]);
 
       // Prepare the user data to be sent
       const userData = JSON.stringify({
@@ -52,18 +52,27 @@ const Dashboard = (props) => {
           },
       };
 
-        // Send the POST request
-        const serverIpAddress = `http://localhost:3001/dashboard/`; 
-        axios.post(serverIpAddress, userData, config)
+      // Send the POST request
+      const serverIpAddress = `http://localhost:3001/dashboard/`; 
+      axios.post(serverIpAddress, userData, config)
         .then((responseData) => {
-          console.log(responseData); 
-          speakText(responseData.data.message)
-          setMessages(prevMessages => [...prevMessages, responseData.data.message]);
+          // Checking 
+          if (responseData.data.status === "success") {
+            console.log(responseData); 
+            speakText(responseData.data.message)
+            setMessages(prevMessages => [...prevMessages, { text: responseData.data.message, type: 'response' }]);
+  
+            // Clear the input after submission
+            setMessage(""); 
+          } else {
+            setMessages(prevMessages => [...prevMessages, { text: responseData.data.message, type: 'response' }]);
+            speakText(responseData.data.message); 
 
             // Clear the input after submission
             setMessage(""); 
+          }
+
         })
-        
     }
   };
 
@@ -85,8 +94,8 @@ const Dashboard = (props) => {
       
       <div className={styles.messagesContainerDiv}>
         {messages.map((msg, index) => (
-          <div key={index} className={styles.messagesContainer}>
-            <p className={styles.message}>{msg}</p>
+          <div key={index} className={`${styles.messagesContainer} ${msg.type === 'user' ? styles.userMessage : styles.responseMessage}`}>
+            <p className={styles.message}>{msg.text}</p>
           </div>
         ))}
         <div ref={messagesEndRef} />

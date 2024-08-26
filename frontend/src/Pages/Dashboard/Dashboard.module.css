@@ -69,3 +69,14 @@
     padding: 12px;
     border-radius: 10px; 
 }
+.userMessage {
+    background-color: #22135e;
+    text-align: right;
+    margin-top: 20px;
+    margin-bottom: 20px;
+  }
+  
+  .responseMessage {
+    background-color: #2384529e;
+    text-align: left;
+  }

@@ -39,15 +39,15 @@ response['good_reply'] = ['Ok Perfect...', 'Perfect...', 'Ok, Thats Good tho..',
 d = {}
 d['wiki_question'] = ['Your answers would be extracted from wikipedia, are you okay with this?']
 d['age'] = ['My name is Aipa, and i am a Personal Assistant at Analytics Intelligence, and i am also 18 years old.', 'My is Aipa, I am a Personal Assistant for Analytics Intelligence, and i am 18years young.']
-stop_words = set(stopwords.words('english')) 
+stop_words = set(stopwords.words('english'))
 
 # Assigning a variable called spell to check and correct the spelling of the input word
 # or sentences passed into the system.
 spell = SpellChecker()
-value = 'doc' 
+value = 'doc'
 
 # Loading in the  json dataset for classification between a Question and a Conversation.
-with open("model/model_1.json") as file:
+with open("Dashboard/model/model_1.json") as file:
     data = json.load(file)
 
 
@@ -112,7 +112,7 @@ def wikipedia_question(message):
         speech = Speech(val, lang)
         speech.play()
 
-        # Getting the user input 
+        # Getting the user input
         msg = input('You: ')
         if msg.lower().replace(' ', '') == 'yes':
             # import the question script and pass the input question into the function.
@@ -132,18 +132,18 @@ def wikipedia_question(message):
                 new_val = " ".join(_correct)
                 corrected_message = extract_noun(new_val)
                 wikipedia_message = wiki.summary(corrected_message, sentences=5)
-                print("Bot: ", wikipedia_message)
-                lang = "en"
-                speech = Speech(wikipedia_message, lang)
-                speech.play()
+                # print("Bot: ", wikipedia_message)
+                # lang = "en"
+                # speech = Speech(wikipedia_message, lang)
+                # speech.play()
+                return wikipedia_message
 
 
             except:
-                print('Please Rephrase, Currently unable to get your result...')
+                return 'Please Rephrase, Currently unable to get your result...'
 
         else:
-            print('Please Rephrase your question, Currently unable to Get your Answers...')
-            pass
+            return 'Please Rephrase your question, Currently unable to Get your Answers...'
 
 
 # Initializing the stemming function to stem the words passed into the system.
@@ -152,7 +152,7 @@ stemmer = LancasterStemmer()
 # Setting a try and exception method to load the pickle file into memory or
 # Create a new one if it is present.
 try:
-    with open("data.pickle", "rb") as f:
+    with open("Dashbaord/data.pickle", "rb") as f:
         words, labels, training, output = pickle.load(f)
 except:
     words = []
@@ -218,7 +218,7 @@ except:
     output = np.array(output)
 
     # Saving the Cleaned dataset into a pickle file
-    with open("data.pickle", "wb") as f:
+    with open("Dashboard/data.pickle", "wb") as f:
         pickle.dump((words, labels, training, output), f)
 
 # Building the model by adding 8 neurons for 3 layers and Resetting the Tensorflow graph.
@@ -234,10 +234,10 @@ model = tflearn.DNN(net)
 
 # Loading the model into memory and saving it as model for predictions.
 try:
-    model.load("model/model.tflearn")
+    model.load("Dashboard/model/model.tflearn")
 except:
     model.fit(training, output, n_epoch=10000, batch_size=8, show_metric=True)
-    model.save("model/model.tflearn")
+    model.save("Dashboard/model/model.tflearn")
 
 
 # Creating a function for taking in words and stemming them into simpler words, then
@@ -262,114 +262,85 @@ def bag_of_words(s, words):
 
 
 # Creating a function to Start the program and run the models on the input messages.
-def chat():
+def chat(inp):
     dict_pickle = []
-    while True:
-        inp = input("You: ")
-        if inp.lower().replace(' ', '') == "quit":
-            break
 
-        # Running the First Model against the input text from the user to determine if the text is a Conversational
-        # message or a Question asked by the user.
-        results = model.predict([bag_of_words(inp, words)])
-        results_index = np.argmax(results)
-        tag = labels[results_index]
+    # Running the First Model against the input text from the user to determine if the text is a Conversational
+    # message or a Question asked by the user.
+    results = model.predict([bag_of_words(inp, words)])
+    results_index = np.argmax(results)
+    tag = labels[results_index]
 
-        # Saving the user input and the corresponding tag predicted by the first model .
-        dict_pickle.append([tag, inp])
+    # Saving the user input and the corresponding tag predicted by the first model .
+    dict_pickle.append([tag, inp])
 
-        # Setting an if statement to check if the predicted tag was a question and if it was
-        # it should pass the input question into the question_classifier script to find out the type of question it is.
-        # After prediction on the actual question, then a function for that particular predicted question is called.
-        if tag == 'question':
-            # Getting The Actual Predicted tag from the Question model and saving it into the variable called quest
-            from question.question import question_classifier
-            quest = question_classifier(inp)
+    # Setting an if statement to check if the predicted tag was a question and if it was
+    # it should pass the input question into the question_classifier script to find out the type of question it is.
+    # After prediction on the actual question, then a function for that particular predicted question is called.
+    if tag == 'question':
+        # Getting The Actual Predicted tag from the Question model and saving it into the variable called quest
+        from Dashboard.question.question import question_classifier
+        quest = question_classifier(inp)
 
-            # Speech 
-            lang = "en"
-            print("Bot: ", quest)
-            speech = Speech(quest, lang)
-            speech.play()
+        # if the predicted Question is a Wikipedia based question, then pass the question into wikipedia api to
+        # Get the answers for the question.
+        if quest == 'wiki_question':
+            data = wikipedia_question(inp)
 
-            # if the predicted Question is a Wikipedia based question, then pass the question into wikipedia api to
-            # Get the answers for the question.
-            if quest == 'wiki_question':
-                wikipedia_question(inp)
+            #
+            return data
 
-            elif quest == 'bank_details':
-                print("""These are your recent transactions\n
-                      Txn: Credit
-                      Acct: 2XX..76X Amt:NGN 6,000.00
-                      Desc:MOB/UTU/3704572469/
-                      Date: 10-Sep-2019 18: 45 
-                      Bal:NGN 195,733,000
-                    """)
-                lang = "en"
-                speech = Speech("Bal:NGN 195,733,000", lang)
-                speech.play();
+        elif quest == 'bank_details':
+            return """These are your recent transactions\n
+                    Txn: Credit
+                    Acct: 2XX..76X Amt:NGN 6,000.00
+                    Desc:MOB/UTU/3704572469/
+                    Date: 10-Sep-2019 18: 45
+                    Bal:NGN 195,733,000
+                """
+            # lang = "en"
+            # speech = Speech("Bal:NGN 195,733,000", lang)
+            # speech.play();
 
-            elif quest == 'location':
-                print('you are located in this particular location...')
+        elif quest == 'location':
+            return 'you are located in this particular location...'
 
-        # Setting an else if statement to check if the predicted tag was a Conversation, and if it was, it
-        # Should pass the input Question into the conversation classifier to actually find out what type of conversation
-        # it is and perform actions based on it .
-        elif tag == 'conversation':
-            # Getting the Actual Predicted Tag from the Conversation model and saving it into the variable called convo
-            from conversation.conversation_script import conversation_classifier
-            convo = conversation_classifier(inp)
+    # Setting an else if statement to check if the predicted tag was a Conversation, and if it was, it
+    # Should pass the input Question into the conversation classifier to actually find out what type of conversation
+    # it is and perform actions based on it .
+    elif tag == 'conversation':
+        # Getting the Actual Predicted Tag from the Conversation model and saving it into the variable called convo
+        from Dashboard.conversation.conversation_script import conversation_classifier
+        convo = conversation_classifier(inp)
 
-            # Setting the language 
-            lang = "en"
+        # Setting the language
+        lang = "en"
 
-            if convo == 'greeting':
-                reply = random.choice(response['greeting'])
-                print("Bot: ", reply)
-                speech = Speech(reply, lang)
-                speech.play()
-            elif convo == 'bio_question':
-                reply = random.choice(response['bio_question'])
-                print("Bot: ", reply)
-                speech = Speech(reply, lang)
-                speech.play()
-            elif convo == 'task':
-                reply = random.choice(response['task'])
-                print("Bot: ", reply)
-                speech = Speech(reply, lang)
-                speech.play()
-            elif convo == 'age':
-                reply = random.choice(response['age'])
-                print("Bot: ", reply)
-                speech = Speech(reply, lang)
-                speech.play()
-            elif convo == 'name':
-                reply = random.choice(response['name'])
-                print("Bot: ", reply)
-                speech = Speech(reply, lang)
-                speech.play()
-            elif convo == 'good_reply':
-                reply = random.choice(response['good_reply'])
-                print("Bot: ", reply)
-                speech = Speech(reply, lang)
-                speech.play()
+        if convo == 'greeting':
+            reply = random.choice(response['greeting'])
+            # print("Bot: ", reply)
+            # speech = Speech(reply, lang)
+            # speech.play()
+            print(reply)
+            return reply
+        elif convo == 'bio_question':
+            reply = random.choice(response['bio_question'])
+            return reply
+        elif convo == 'task':
+            reply = random.choice(response['task'])
+            return reply
+        elif convo == 'age':
+            reply = random.choice(response['age'])
+            return reply
+        elif convo == 'name':
+            reply = random.choice(response['name'])
+            return reply
+        elif convo == 'good_reply':
+            reply = random.choice(response['good_reply'])
+            return reply
 
-        # Saving the user input and predicted tags into a new csv dataset file called 'inputdata.csv'
-        # for furthermore training.
-        for i in dict_pickle:
-            with open('inputdata.csv', 'a+') as f:
-                f.write('{}\n'.format(i))
-
-
-# Defining a function for the interactive mode in the System.
-def interaction(value, interactive_message):
-    if value == 'question':
-        message = interactive_message.lower()
-        # Run it along a new model that classifies on inputs and responses.
-        # or start an interactive breakdown on how the question is passed.
-    elif value == 'conversation':
-        pass
-        # Start an interactive conversation on how the first question was asked.
-
-
-chat()
+    # Saving the user input and predicted tags into a new csv dataset file called 'inputdata.csv'
+    # for furthermore training.
+    for i in dict_pickle:
+        with open('Dashboard/inputdata.csv', 'a+') as f:
+            f.write('{}\n'.format(i))

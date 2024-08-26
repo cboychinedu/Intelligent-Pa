@@ -1,5 +1,6 @@
 flask-socketio
 Flask
+bcrypt
 Flask-Cors
 Flask-Jsonpify
 Flask-RESTful
@@ -9,6 +10,7 @@ Pillow
 joblib
 wikipedia
 nltk
+pymongo
 pyspellchecker
 requests
 scapy
@@ -17,7 +19,7 @@ scikit-learn
 scipy
 seaborn
 SpeechRecognition
-tensorflow
+# tensorflow
 tflearn
 PyJWT
 python-dotenv

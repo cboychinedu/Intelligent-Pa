@@ -27,12 +27,14 @@ class App extends Component {
     return(
       <BrowserRouter>
         <Routes>
-          {/* <Route path="/" element={<Login/>} /> 
-          <Route path="/register" element={<Register /> } /> */}
+          <Route path="/" element={<Login/>} /> 
+          <Route path="/login" element={<Login/>} /> 
+          <Route path="/register" element={<Register /> } />
 
           {isLoggedIn && xAuthToken ? (
             <>
               <Route path="/dashboard" element={<Dashboard />} /> 
+              <Route path="/login" element={<Dashboard/>} /> 
             </>
           ): (
             <>

@@ -1,14 +1,14 @@
-#!/usr/bin/env python3
+#!/usr/bin/env python
 
-# Importing the necessary Packages.
-import string
+# importing the necessary packages
+#from sklearn.externals import joblib
 import joblib
+import string
 from sklearn.feature_extraction.text import TfidfVectorizer
-from nltk.corpus import stopwords
-from nltk import PorterStemmer as Stemmer
 from sklearn.pipeline import Pipeline
 from sklearn.naive_bayes import MultinomialNB
-#from sklearn.externals import joblib
+from nltk.corpus import stopwords
+from nltk import PorterStemmer as Stemmer
 
 #
 def process(text):
@@ -24,26 +24,25 @@ def process(text):
     # Return the token list
     return text
 
-# Passing the stemmed words into a vectorizer to convert the words into
-# vectors and hold numbers of the word count of each individual words.
+
 tfidfv = TfidfVectorizer(analyzer = process)
 
-# Building The model using Naive Bayes Classifier
-question_model = Pipeline([
+# Building The model using Naive Bayes Classifier and vectorizer to
+# Convert the words into vectors with number of word count.
+conversation_model = Pipeline([
     ('vectorizer', TfidfVectorizer(analyzer=process)),
     ('classifier', MultinomialNB())
 
 ])
 
-# Loading the saved model from disk.
-filename = 'question/finalized_model.sav'
-# load the model from disk
-question_model = joblib.load(filename)
+# Loading the saved model from disk into memory...
+filename = 'Dashboard/conversation/finalized_model'
+conversation_model = joblib.load(filename)
 
 
-# Defining a function to run and use the model for classfication and return the
-# Values back to the user.
-def question_classifier(s):
-    result = question_model.predict([s])[0]
+# Defining a function to run and use the model for classfication
+# Then return the index of the predicted values back .
+def conversation_classifier(s):
+    print(s); 
+    result = conversation_model.predict([s])[0]
     return result
-
