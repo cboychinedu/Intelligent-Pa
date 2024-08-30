@@ -69,3 +69,12 @@
         width: 100%;
     }
 }
+
+@media (min-width: 403px) and (max-width: 784px) {
+    .rightNav {
+        display: none; 
+    }
+    .leftNav {
+        width: 100%;
+    }
+}
