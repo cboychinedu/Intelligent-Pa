@@ -8,8 +8,7 @@
 .container {
     display: flex;
     bottom: 0;
-    width: 100%;
-    position: absolute;
+    width: 100%; 
     align-content: center;
     justify-content: center;
 }
@@ -56,13 +55,13 @@
 .messagesContainerDiv {
     margin: auto;
     width: 70%;
-    /* border: 1px solid #2e2e2f;; */
     height: 440px;
     margin-top: 55px;
     scrollbar-width: none;
     -ms-overflow-style: none;
     overflow-y: scroll;  
     padding-bottom: 25px; 
+    margin-bottom: 22px;
 }
 .messagesContainer {
     color: white;
@@ -90,12 +89,32 @@
     .messagesContainerDiv {
         margin: auto;
         width: 70%;
-        /* border: 1px solid #2e2e2f;; */
         height: 340px;
         margin-top: 55px;
         scrollbar-width: none;
         -ms-overflow-style: none;
         overflow-y: scroll;  
         padding-bottom: 25px; 
+        margin-bottom: 22px;
     }
-  }
+}
+
+@media (min-width: 300px) and (max-width: 403px){
+    .messagesContainerDiv {
+        height: 193px;
+        margin-bottom: 22px;
+    }
+    .rightNav {
+        display: none;
+    }
+}
+
+@media (min-width: 434px) and (max-width: 731px) {
+    .messagesContainerDiv {
+        height: 330px;
+        margin-bottom: 22px;
+    }
+    .rightNav {
+        display: none;
+    }
+}

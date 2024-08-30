@@ -60,7 +60,12 @@ const Dashboard = (props) => {
           if (responseData.data.status === "success") {
             console.log(responseData); 
             speakText(responseData.data.message)
-            setMessages(prevMessages => [...prevMessages, { text: responseData.data.message, type: 'response' }]);
+
+            // Delay for 3 seconds 
+            setTimeout(() => {
+              // Display the response message 
+              setMessages(prevMessages => [...prevMessages, { text: responseData.data.message, type: 'response' }]);
+            }, 3000)
   
             // Clear the input after submission
             setMessage(""); 
