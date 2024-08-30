@@ -57,7 +57,7 @@
     margin: auto;
     width: 70%;
     /* border: 1px solid #2e2e2f;; */
-    height: 589px;
+    height: 440px;
     margin-top: 55px;
     scrollbar-width: none;
     -ms-overflow-style: none;
@@ -84,4 +84,18 @@
   .responseMessage {
     background-color: #2384529e;
     text-align: left;
+  }
+
+  @media (max-width: 1275px) {
+    .messagesContainerDiv {
+        margin: auto;
+        width: 70%;
+        /* border: 1px solid #2e2e2f;; */
+        height: 340px;
+        margin-top: 55px;
+        scrollbar-width: none;
+        -ms-overflow-style: none;
+        overflow-y: scroll;  
+        padding-bottom: 25px; 
+    }
   }
