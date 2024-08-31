@@ -11,6 +11,7 @@
     width: 100%; 
     align-content: center;
     justify-content: center;
+    position: relative;
 }
 .inputForm {
     padding: 10px;
@@ -55,7 +56,7 @@
 .messagesContainerDiv {
     margin: auto;
     width: 70%;
-    height: 440px;
+    height: 590px;
     margin-top: 55px;
     scrollbar-width: none;
     -ms-overflow-style: none;
@@ -89,7 +90,7 @@
     .messagesContainerDiv {
         margin: auto;
         width: 70%;
-        height: 340px;
+        height: 545px;
         margin-top: 55px;
         scrollbar-width: none;
         -ms-overflow-style: none;
@@ -101,7 +102,7 @@
 
 @media (min-width: 300px) and (max-width: 403px){
     .messagesContainerDiv {
-        height: 381px;
+        height: 545px;
         margin-bottom: 22px;
     }
     .rightNav {
@@ -111,7 +112,7 @@
 
 @media (min-width: 434px) and (max-width: 731px) {
     .messagesContainerDiv {
-        height: 330px;
+        height: 545px;
         margin-bottom: 22px;
     }
     .rightNav {
