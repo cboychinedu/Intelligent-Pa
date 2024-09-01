@@ -1,6 +1,7 @@
 // Importing the necessary modules
 import React, { Fragment, useState, useEffect, useRef } from 'react';
 import axios from 'axios';
+import Speech from "react-text-to-speech"; 
 import styles from "./Dashboard.module.css"; 
 import Navbar from '../Components/Navbar/Navbar';
 
@@ -9,6 +10,7 @@ const Dashboard = (props) => {
   // Setting the state 
   const [message, setMessage] = useState(""); 
   const [messages, setMessages] = useState([]);
+  const [response, setResponse] = useState(""); 
 
   // Reference to the messages container div
   const messagesEndRef = useRef(null);
@@ -60,6 +62,7 @@ const Dashboard = (props) => {
           if (responseData.data.status === "success") {
             console.log(responseData); 
             speakText(responseData.data.message)
+            setResponse(responseData.data.message)
 
             // Delay for 3 seconds 
             setTimeout(() => {
@@ -101,6 +104,7 @@ const Dashboard = (props) => {
         {messages.map((msg, index) => (
           <div key={index} className={`${styles.messagesContainer} ${msg.type === 'user' ? styles.userMessage : styles.responseMessage}`}>
             <p className={styles.message}>{msg.text}</p>
+            <Speech text={response} /> 
           </div>
         ))}
         <div ref={messagesEndRef} />

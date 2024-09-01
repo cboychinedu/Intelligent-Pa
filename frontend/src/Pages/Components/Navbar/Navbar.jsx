@@ -24,7 +24,7 @@ const Navbar = (props) => {
                 {/* Adding the navbar container */}
                 <div className={styles.navContainerDiv}>
                     <nav className={styles.leftNav}>
-                        <Link to="/"> Home </Link>
+                        <Link to="/dashboard"> Home </Link>
                         <Link to="#"> About </Link>
                         <Link to="#"> ContactUs</Link>
                         <Link to="#" onClick={logoutUser}> Logout </Link> 

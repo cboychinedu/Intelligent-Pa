@@ -34,7 +34,7 @@ class App extends Component {
           {isLoggedIn && xAuthToken ? (
             <>
               <Route path="/dashboard" element={<Dashboard />} /> 
-              <Route path="/login" element={<Dashboard/>} /> 
+              <Route path="/" element={<Dashboard/>} /> 
             </>
           ): (
             <>
