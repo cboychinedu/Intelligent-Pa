@@ -51,11 +51,11 @@ questionModel = Pipeline([
 
 ])
 
-# Loading the model 
+# Loading the conversation model 
 filename = "conversationModel"
 conversationModel = joblib.load(filename)
 
-# loading the model 
+# loading the questions model 
 filename = "questionModel"
 questionModel = joblib.load(filename)
 
